@@ -35,7 +35,7 @@ jobs:
           zip -r ../../extension.zip .
 
       - name: Publish to CWS
-        if: env.VERSION_CHANGED == 'true'
+        if: false
         uses: mobilefirstllc/cws-publish@5e3b5249835f1fac9f7e8c9982fec7a80e1b82a8
         with:
           action: publish
@@ -44,4 +44,14 @@ jobs:
           client_secret: ${{ secrets.CWS_CLIENT_SECRET }}
           refresh_token: ${{ secrets.CWS_REFRESH_TOKEN }}
           zip_file: extension.zip
+        continue-on-error: true
+
+      - name: Publish to EWS
+        if: env.VERSION_CHANGED == 'true'
+        uses: wdzeng/edge-addon@d4db1eea77297a24d799394dec87e8912e0902f9 # v2.1.0
+        with:
+          product-id: ${{ secrets.EWS_PRODUCT_ID }}
+          client-id: ${{ secrets.EWS_CLIENT_ID }}
+          api-key: ${{ secrets.EWS_CLIENT_SECRET }}
+          zip-path: extension.zip
         continue-on-error: true
