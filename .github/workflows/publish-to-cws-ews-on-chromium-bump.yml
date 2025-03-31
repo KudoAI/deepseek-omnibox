@@ -1,4 +1,4 @@
-name: Publish to CWS on Chromium version bump
+name: Publish to CWS + EWS on Chromium version bump
 
 on:
   push:
