@@ -6,8 +6,8 @@ permissions:
 
 jobs:
 
-  lint-imports-js-json-md-regex-yaml:
-    name: Lint Imports + JavaScript + JSON + Markdown + Regex + YAML
+  eslint:
+    name: ESLint
     runs-on: ubuntu-latest
     steps:
 
