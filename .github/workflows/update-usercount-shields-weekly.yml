@@ -110,12 +110,18 @@ jobs:
           CHROMIUM_USERS="${{ env.CHROMIUM_USERS }}" TOTAL_USERS="${{ env.TOTAL_USERS }}"
           if [ "$TOTAL_USERS" == "0" ] ; then echo "Error getting total usercount"
           else # perform update
+            users_updated=false
             for readme in $(find docs/ -name "README.md") ; do
               old_readme=$(<"$readme")
-              users=$([[ "$readme" == *"/chromium/"* ]] && echo "$CHROMIUM_USERS" || echo "$TOTAL_USERS")
-              sed -i "s/\(badge\/[^-]*-\)[0-9.,km+]\+-/\1$users-/gI" "$readme"
+              sed -i "s/\(badge\/[^-]*-\)[0-9.,km+]\+-/\1$TOTAL_USERS-/gI" "$readme"
               new_readme=$(<"$readme")
-              if [[ "$old_readme" != "$new_readme" && "$users_updated" != true ]] ; then users_updated=true ; fi
+              if [[ "$old_readme" != "$new_readme" ]] ; then users_updated=true ; fi
+            done
+            for readme in $(find chromium/docs/ -name "README.md") ; do
+              old_readme=$(<"$readme")
+              sed -i "s/\(badge\/[^-]*-\)[0-9.,km+]\+-/\1$CHROMIUM_USERS-/gI" "$readme"
+              new_readme=$(<"$readme")
+              if [[ "$old_readme" != "$new_readme" ]] ; then users_updated=true ; fi
             done
             if [ "$users_updated" = true ] ; then echo "Usercount shields updated"
             else echo "Usercount shields already up-to-date" ; fi
