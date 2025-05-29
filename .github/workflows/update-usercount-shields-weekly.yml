@@ -3,7 +3,7 @@ name: Update usercount shields in READMEs, then sync to adamlui/ai-web-extension
 on:
   workflow_dispatch:
   schedule:
-    - cron: "33 5 * * 2,5"  # every Tue/Fri @ 4:33 AM
+    - cron: "33 5 * * 2,5"  # every Tue/Fri @ 5:33 AM
 
 permissions:
   contents: read
