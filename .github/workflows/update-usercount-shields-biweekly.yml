@@ -18,8 +18,6 @@ jobs:
       - name: Checkout adamlui/deepseek-omnibox
         uses: actions/checkout@v5
         with:
-          token: ${{ secrets.REPO_SYNC_PAT }}
-          repository: adamlui/deepseek-omnibox
           path: adamlui/deepseek-omnibox
 
       - name: Checkout adamlui/ai-web-extensions
